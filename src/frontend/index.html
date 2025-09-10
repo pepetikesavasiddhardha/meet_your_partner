@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Meet Your Partner - Dating App</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .required-star {
+      color: red;
+      margin-left: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>💖 Meet Your Partner</h1>
+    <p>Please enter your details and what you expect in a partner.</p>
+
+    <!-- ===================== -->
+    <!-- USER DETAILS SECTION -->
+    <!-- ===================== -->
+    <form id="searchForm" onsubmit="event.preventDefault(); searchMatches();">
+      <h2>Your Details <span class="required-star">*</span></h2>
+
+      <label>Gender<span class="required-star">*</span>:</label>
+      <select id="gender" required>
+        <option value="">-- Select --</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Transgender">Transgender</option>
+        <option value="Prefer Not to Say">Prefer Not to Say</option>
+        <option value="Non-binary">Non-binary</option>
+        <option value="Genderfluid">Genderfluid</option>
+      </select><br>
+
+      <label>Orientation<span class="required-star">*</span>:</label>
+      <select id="sexual_orientation" required>
+        <option value="">-- Select --</option>
+        <option value="Straight">Straight</option>
+        <option value="Gay">Gay</option>
+        <option value="Bisexual">Bisexual</option>
+        <option value="Pansexual">Pansexual</option>
+        <option value="Lesbian">Lesbian</option>
+        <option value="Queer">Queer</option>
+        <option value="Asexual">Asexual</option>
+        <option value="Demisexual">Demisexual</option>
+      </select><br>
+
+      <label>Location Type<span class="required-star">*</span>:</label>
+      <select id="location_type" required>
+        <option value="">-- Select --</option>
+        <option value="Urban">Urban</option>
+        <option value="Rural">Rural</option>
+        <option value="Suburban">Suburban</option>
+        <option value="Remote Area">Remote Area</option>
+        <option value="Metro">Metro</option>
+        <option value="Small Town">Small Town</option>
+      </select><br>
+
+      <label>Income Bracket<span class="required-star">*</span>:</label>
+      <select id="income_bracket" required>
+        <option value="">-- Select --</option>
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+        <option value="Lower-Middle">Lower-Middle</option>
+        <option value="Upper-Middle">Upper-Middle</option>
+        <option value="Very High">Very High</option>
+        <option value="Very Low">Very Low</option>
+      </select><br>
+
+      <label>Education Level<span class="required-star">*</span>:</label>
+      <select id="education_level" required>
+        <option value="">-- Select --</option>
+        <option value="High School">High School</option>
+        <option value="No Formal Education">No Formal Education</option>
+        <option value="Bachelor’s">Bachelor’s</option>
+        <option value="Master’s">Master’s</option>
+        <option value="Postdoc">Postdoc</option>
+        <option value="Diploma">Diploma</option>
+        <option value="Associate’s">Associate’s</option>
+        <option value="MBA">MBA</option>
+        <option value="PhD">PhD</option>
+      </select><br>
+
+      <label>Interests (comma separated)<span class="required-star">*</span>:</label>
+      <input id="interest_tags" required><br>
+
+      <!-- ===================== -->
+      <!-- PARTNER PREFERENCES -->
+      <!-- ===================== -->
+      <h2>Partner Preferences</h2>
+
+      <label>Gender:</label>
+      <select id="partner_gender">
+        <option value="">-- Any --</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Transgender">Transgender</option>
+        <option value="Prefer Not to Say">Prefer Not to Say</option>
+        <option value="Non-binary">Non-binary</option>
+        <option value="Genderfluid">Genderfluid</option>
+      </select><br>
+
+      <label>Orientation:</label>
+      <select id="partner_sexual_orientation">
+        <option value="">-- Any --</option>
+        <option value="Straight">Straight</option>
+        <option value="Gay">Gay</option>
+        <option value="Bisexual">Bisexual</option>
+        <option value="Pansexual">Pansexual</option>
+        <option value="Lesbian">Lesbian</option>
+        <option value="Queer">Queer</option>
+        <option value="Asexual">Asexual</option>
+        <option value="Demisexual">Demisexual</option>
+      </select><br>
+
+      <label>Location Type:</label>
+      <select id="partner_location_type">
+        <option value="">-- Any --</option>
+        <option value="Urban">Urban</option>
+        <option value="Rural">Rural</option>
+        <option value="Suburban">Suburban</option>
+        <option value="Remote Area">Remote Area</option>
+        <option value="Metro">Metro</option>
+        <option value="Small Town">Small Town</option>
+      </select><br>
+
+      <label>Income Bracket:</label>
+      <select id="partner_income_bracket">
+        <option value="">-- Any --</option>
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+        <option value="Lower-Middle">Lower-Middle</option>
+        <option value="Upper-Middle">Upper-Middle</option>
+        <option value="Very High">Very High</option>
+        <option value="Very Low">Very Low</option>
+      </select><br>
+
+      <label>Education Level:</label>
+      <select id="partner_education_level">
+        <option value="">-- Any --</option>
+        <option value="High School">High School</option>
+        <option value="No Formal Education">No Formal Education</option>
+        <option value="Bachelor’s">Bachelor’s</option>
+        <option value="Master’s">Master’s</option>
+        <option value="Postdoc">Postdoc</option>
+        <option value="Diploma">Diploma</option>
+        <option value="Associate’s">Associate’s</option>
+        <option value="MBA">MBA</option>
+        <option value="PhD">PhD</option>
+      </select><br>
+
+      <label>Interests (comma separated)<span class="required-star">*</span>:</label>
+      <input id="partner_interest_tags" required><br>
+
+      <button type="submit">Find Matches</button>
+    </form>
+
+    <div id="loading" style="display:none;">🔎 Searching for matches...</div>
+    <div id="profile-card"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
