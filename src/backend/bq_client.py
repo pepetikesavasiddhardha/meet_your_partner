@@ -73,9 +73,10 @@ def insert_user(user_traits):
     unique_id = abs(hash(str(time.time()) + user_traits["interest_tags"])) % (10**9)
 
     query = f"""
-    CREATE OR REPLACE TABLE `{bq_config.USER_TABLE}` AS
+    INSERT INTO `{bq_config.USER_TABLE}` (id, gender, sexual_orientation, location_type,
+        income_bracket, education_level, interest_tags, ml_generate_embedding_result)
     WITH new_user AS (
-      SELECT
+    SELECT
         {unique_id} AS id,
         "{user_traits['gender']}" AS gender,
         "{user_traits['sexual_orientation']}" AS sexual_orientation,
@@ -85,20 +86,22 @@ def insert_user(user_traits):
         "{user_traits['interest_tags']}" AS interest_tags
     ),
     new_user_embed AS (
-      SELECT
+    SELECT
         id, gender, sexual_orientation, location_type,
         income_bracket, education_level, content as interest_tags,
         ml_generate_embedding_result
-      FROM ML.GENERATE_EMBEDDING(
+    FROM ML.GENERATE_EMBEDDING(
         MODEL `{bq_config.EMBED_MODEL}`,
-        (SELECT id, gender, sexual_orientation, location_type,
-        income_bracket, education_level, interest_tags AS content FROM new_user),
+        (
+        SELECT id, gender, sexual_orientation, location_type,
+                income_bracket, education_level, interest_tags AS content
+        FROM new_user
+        ),
         STRUCT(TRUE AS flatten_json_output)
-      )
     )
-    SELECT * FROM `{bq_config.USER_TABLE}`
-    UNION ALL
+    )
     SELECT * FROM new_user_embed
     """
+
     client.query(query).result()
     return unique_id
