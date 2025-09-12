@@ -5,6 +5,7 @@
   <title>Meet Your Partner - Dating App</title>
   <link rel="stylesheet" href="style.css">
   <style>
+    /* Style for the red star marking required fields */
     .required-star {
       color: red;
       margin-left: 4px;
@@ -19,9 +20,11 @@
     <!-- ===================== -->
     <!-- USER DETAILS SECTION -->
     <!-- ===================== -->
+    <!-- This section collects mandatory user profile information -->
     <form id="searchForm" onsubmit="event.preventDefault(); searchMatches();">
       <h2>Your Details <span class="required-star">*</span></h2>
 
+      <!-- Each dropdown ensures users select standardized values -->
       <label>Gender<span class="required-star">*</span>:</label>
       <select id="gender" required>
         <option value="">-- Select --</option>
@@ -83,12 +86,14 @@
         <option value="PhD">PhD</option>
       </select><br>
 
+      <!-- Free text for multiple interests -->
       <label>Interests (comma separated)<span class="required-star">*</span>:</label>
       <input id="interest_tags" required><br>
 
       <!-- ===================== -->
       <!-- PARTNER PREFERENCES -->
       <!-- ===================== -->
+      <!-- User can specify what kind of partner they are looking for -->
       <h2>Partner Preferences</h2>
 
       <label>Gender:</label>
@@ -155,13 +160,18 @@
       <label>Interests (comma separated)<span class="required-star">*</span>:</label>
       <input id="partner_interest_tags" required><br>
 
+      <!-- Submit button triggers match search -->
       <button type="submit">Find Matches</button>
     </form>
 
+    <!-- Loader while fetching results -->
     <div id="loading" style="display:none;">🔎 Searching for matches...</div>
+
+    <!-- Container where results (profile cards) are rendered -->
     <div id="profile-card"></div>
   </div>
 
+  <!-- JS to handle form submission and UI updates -->
   <script src="script.js"></script>
 </body>
 </html>

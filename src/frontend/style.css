@@ -1,29 +1,34 @@
-/* General page layout */
+/* ============================
+   General Page Styling
+   ============================ */
 body {
   font-family: Arial, sans-serif;
-  background: #f8f9fa;
+  background: #f8f9fa;         /* light gray background */
   margin: 0;
   padding: 0;
-  display: flex;
+  display: flex;               /* center container */
   justify-content: center;
   align-items: flex-start;
   min-height: 100vh;
-  color: #333;
+  color: #333;                 /* default text color */
 }
 
 .container {
   width: 100%;
-  max-width: 600px;
+  max-width: 600px;            /* readable width for forms */
   background: #fff;
   padding: 20px 30px;
   margin: 30px auto;
-  border-radius: 12px;
+  border-radius: 12px;         /* rounded box */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+/* ============================
+   Headings
+   ============================ */
 h1 {
   text-align: center;
-  color: #d6336c;
+  color: #d6336c;              /* pink accent for app name */
 }
 
 h2 {
@@ -33,6 +38,9 @@ h2 {
   padding-bottom: 5px;
 }
 
+/* ============================
+   Form Controls
+   ============================ */
 label {
   display: block;
   margin-top: 12px;
@@ -50,22 +58,25 @@ input, select, button {
 
 button {
   margin-top: 20px;
-  background-color: #d6336c;
+  background-color: #d6336c;   /* matches app accent */
   color: white;
   font-weight: bold;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background 0.3s; /* smooth hover effect */
 }
 
 button:hover {
   background-color: #b02a56;
 }
 
+/* Mark required fields visually */
 .required-star {
   color: red;
 }
 
-/* Loading message */
+/* ============================
+   Status Messages
+   ============================ */
 #loading {
   text-align: center;
   font-style: italic;
@@ -73,7 +84,9 @@ button:hover {
   margin: 20px 0;
 }
 
-/* Profile card */
+/* ============================
+   Profile Card (Results)
+   ============================ */
 .card {
   background: #fff;
   padding: 20px;
@@ -83,15 +96,18 @@ button:hover {
   text-align: center;
 }
 
+/* Profile picture styling */
 .profile-pic {
   width: 100px;
   height: 100px;
-  border-radius: 50%;
+  border-radius: 50%;          /* circle image */
   margin-bottom: 15px;
   border: 3px solid #d6336c;
 }
 
-/* Action buttons */
+/* ============================
+   Match Action Buttons
+   ============================ */
 .actions {
   display: flex;
   justify-content: space-between;
@@ -109,6 +125,7 @@ button:hover {
   margin: 0 5px;
 }
 
+/* Red button → "Not Interested" */
 .btn.red {
   background-color: #e63946;
   color: white;
@@ -118,6 +135,7 @@ button:hover {
   background-color: #c92a35;
 }
 
+/* Green button → "Interested" */
 .btn.green {
   background-color: #2a9d8f;
   color: white;
@@ -127,7 +145,9 @@ button:hover {
   background-color: #21867a;
 }
 
-/* Details inside profile */
+/* ============================
+   Details Section in Profile
+   ============================ */
 #details {
   margin-top: 15px;
   text-align: left;

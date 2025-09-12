@@ -1,6 +1,11 @@
+// ==========================
+// Main function: searchMatches()
+// ==========================
+// Collects user input from the form, sends it to backend via POST request,
+// retrieves top matches from BigQuery, and starts displaying results.
 async function searchMatches() {
     const userData = {
-        // user details (all mandatory)
+        // User details (all fields mandatory in form)
         gender: document.getElementById("gender").value,
         sexual_orientation: document.getElementById("sexual_orientation").value,
         location_type: document.getElementById("location_type").value,
@@ -8,7 +13,7 @@ async function searchMatches() {
         education_level: document.getElementById("education_level").value,
         interest_tags: document.getElementById("interest_tags").value,
 
-        // partner preferences (only interests mandatory)
+        // Partner preferences (only interests mandatory, rest optional)
         partner_gender: document.getElementById("partner_gender").value || null,
         partner_sexual_orientation: document.getElementById("partner_sexual_orientation").value || null,
         partner_location_type: document.getElementById("partner_location_type").value || null,
@@ -17,10 +22,11 @@ async function searchMatches() {
         partner_interest_tags: document.getElementById("partner_interest_tags").value
     };
 
-    // show loading
+    // Show loading indicator while backend request is running
     document.getElementById("loading").style.display = "block";
 
     try {
+        // Send POST request to backend with user + partner preferences
         const response = await fetch("http://127.0.0.1:5000/search", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -29,22 +35,30 @@ async function searchMatches() {
 
         const data = await response.json();
 
-        // hide loading
+        // Hide loading once results are received
         document.getElementById("loading").style.display = "none";
 
-        // store results globally
+        // Store matches globally so they can be accessed across functions
         window.newUserId = data.new_user_id;
         window.matches = data.matches;
         window.currentIndex = 0;
 
+        // Start showing the first profile card
         showNextProfile();
     } catch (error) {
         console.error("Error fetching matches:", error);
-        document.getElementById("loading").innerText = "❌ Error fetching matches. Check backend.";
+        document.getElementById("loading").innerText =
+            "❌ Error fetching matches. Check backend.";
     }
 }
 
+// ==========================
+// Display next profile card
+// ==========================
+// Shows a single user profile at a time, with option to view details
+// and mark as Interested / Not Interested.
 function showNextProfile() {
+    // If no more matches remain, show a thank-you message
     if (!window.matches || window.currentIndex >= window.matches.length) {
         document.getElementById("profile-card").innerHTML = `
             <p>✅ Thank you! No more matches to show.</p>`;
@@ -53,6 +67,7 @@ function showNextProfile() {
 
     const profile = window.matches[window.currentIndex];
 
+    // Render profile card UI with avatar, ID, and "view details" button
     document.getElementById("profile-card").innerHTML = `
         <div class="card">
             <img src="images/avatar.png" alt="User" class="profile-pic">
@@ -67,6 +82,10 @@ function showNextProfile() {
     `;
 }
 
+// ==========================
+// View detailed profile info
+// ==========================
+// Expands the profile card to show all user details (traits + interests).
 function viewDetails(index) {
     const profile = window.matches[index];
     document.getElementById("details").innerHTML = `
@@ -79,6 +98,11 @@ function viewDetails(index) {
     `;
 }
 
+// ==========================
+// Match decision handlers
+// ==========================
+// "Interested" → notify user, then move to next profile.
+// "Not Interested" → simply move to next profile.
 function interested() {
     alert("💚 Thank you, your response will be shared to this user.");
     window.currentIndex++;
